@@ -12,6 +12,7 @@ namespace lab4_FTP
     class Program
     {
         // example ftp server credentials
+        // https://www.mkwk019.cba.pl/ftp/index.php
         // hostname     port username      password
         // mkwk019.cba.pl 21 ad2345234v5aa 52hslJ315r7O
         static void Main(string[] args)
