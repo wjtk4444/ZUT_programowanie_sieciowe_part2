@@ -32,6 +32,8 @@ namespace lab4_FTP
             {
                 hostname = args[0].Substring(0, args[0].IndexOf('/'));
                 initialDirectory = args[0].Substring(hostname.Length, args[0].Length - (hostname.Length));
+                if (initialDirectory[initialDirectory.Length - 1] != '/')
+                    initialDirectory += '/';
             }
             else
             {
@@ -39,14 +41,14 @@ namespace lab4_FTP
                 initialDirectory = "/";
             }
 
-            FTPClient ftpClient = new FTPClient(hostname, port, username, password, initialDirectory);
+            FTPClient ftpClient = new FTPClient(hostname, port, username, password);
             Console.WriteLine($"Connecting to {hostname} as {username}");
-            menuLoop(ftpClient, hostname, username);
+            menuLoop(ftpClient, hostname, username, initialDirectory);
         }
 
-        static void menuLoop(FTPClient ftpClient, string hostname, string username)
+        static void menuLoop(FTPClient ftpClient, string hostname, string username, string initialDirectory)
         {
-            string currentDirectory = "/";
+            string currentDirectory = initialDirectory;
 
             while (true)
             {

@@ -11,11 +11,10 @@ namespace lab4_FTP
 {
     class FTPClient
     {
-        public FTPClient(string hostname, int port, string username, string password, string initialDirectory = "/")
+        public FTPClient(string hostname, int port, string username, string password)
         {
             this.hostname = hostname;
             this.port = port;
-            this.initialDirectory = initialDirectory;
             credentials = new NetworkCredential(username, password);
         }
 
@@ -37,7 +36,7 @@ namespace lab4_FTP
         public List<string> getDirectoryContents(string directory = null)
         {
             if (directory == null)
-                directory = initialDirectory;
+                directory = "/";
 
             //        whatever comes first  +  modification date MMM DD HH:MM           + directory / file name
             Regex regex = new Regex("(.+?)" + "[A-Za-z]{3} [0-9]{2} [0-9]{2}:[0-9]{2} " + "(?<DIRECTORY>.+)");
@@ -76,7 +75,6 @@ namespace lab4_FTP
 
         private string hostname;
         private int port;
-        private string initialDirectory;
         NetworkCredential credentials;
     }
 }
