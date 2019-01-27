@@ -11,6 +11,9 @@ namespace lab4_FTP
 {
     class Program
     {
+        // example ftp server credentials
+        // hostname     port username      password
+        // mkwk019.cba.pl 21 ad2345234v5aa 52hslJ315r7O
         static void Main(string[] args)
         {
             if (args.Length != 4)
@@ -145,7 +148,7 @@ namespace lab4_FTP
                 if (!files) // directories
                 {
                     Console.WriteLine($"{prefix}directory: {s}");
-                    System.Threading.Thread.Sleep(1000);
+                    System.Threading.Thread.Sleep(500);
                     printTree(ftpClient, currentDirectory + s + "/", prefix + "\t");
                 }
                 else
@@ -155,61 +158,5 @@ namespace lab4_FTP
             }
 
         }
-    }
-
-    class FTPClient
-    {
-        public FTPClient(string hostname, int port, string username, string password, string initialDirectory = "/")
-        {
-            this.hostname = hostname;
-            this.port = port;
-            this.initialDirectory = initialDirectory;
-            credentials = new NetworkCredential(username, password);
-        }
-
-        public List<string> getDirectoryContents(string directory = null)
-        {
-            if (directory == null)
-                directory = initialDirectory;
-
-            //        whatever comes first  +  modification date MMM DD HH:MM           + directory / file name
-            Regex regex = new Regex("(.+?)" + "[A-Za-z]{3} [0-9]{2} [0-9]{2}:[0-9]{2} " + "(?<DIRECTORY>.+)");
-
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create($"ftp://{hostname}:{port}{directory}");
-            request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
-            request.Credentials = credentials;
-            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-
-            List<string> directories = new List<string>();
-            List<string> files = new List<string>();
-            using (StreamReader sr = new StreamReader(response.GetResponseStream()))
-            {
-                string line;
-                while ((line = sr.ReadLine()) != null)
-                    if (!string.IsNullOrWhiteSpace(line) && line != "." && line != "..")
-                    {
-                        Match match = regex.Match(line);
-                        if (!match.Groups["DIRECTORY"].Success)
-                            continue;
-
-                        if (match.Groups["DIRECTORY"].Value == "." || match.Groups["DIRECTORY"].Value == "..")
-                            continue;
-
-                        if (line[0] == 'd')
-                            directories.Add(match.Groups["DIRECTORY"].Value);
-                        else
-                            files.Add(match.Groups["DIRECTORY"].Value);
-                    }
-            }
-
-            directories.Add("-");
-            directories.AddRange(files);
-            return directories;
-        }
-
-        private string hostname;
-        private int port;
-        private string initialDirectory;
-        NetworkCredential credentials;
     }
 }
