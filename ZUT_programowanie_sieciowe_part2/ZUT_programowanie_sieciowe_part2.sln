@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab3_SMTP", "lab3_SMTP\lab3_SMTP.csproj", "{BED5FD59-67B8-4583-8BA0-1A4151DEA6AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab5_crawler", "lab5_crawler\lab5_crawler.csproj", "{0C9276D0-476A-4222-9A05-7B885451A1B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{BED5FD59-67B8-4583-8BA0-1A4151DEA6AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BED5FD59-67B8-4583-8BA0-1A4151DEA6AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BED5FD59-67B8-4583-8BA0-1A4151DEA6AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C9276D0-476A-4222-9A05-7B885451A1B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C9276D0-476A-4222-9A05-7B885451A1B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C9276D0-476A-4222-9A05-7B885451A1B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C9276D0-476A-4222-9A05-7B885451A1B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
